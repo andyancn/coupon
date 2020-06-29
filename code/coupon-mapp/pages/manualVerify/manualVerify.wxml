@@ -1,0 +1,16 @@
+<!--logs.wxml-->
+<view class="container">
+  <view class="copupon bd-b flex-hc-vc" wx:if="{{type == 1}}">
+    <label class="grey3">券码</label>
+    <view class="input-box flex-g-1">
+      <input maxlength="30" placeholder-style="color:#ccc;" bindinput="bindCouponChange" type="text" value="{{coupon}}" placeholder="请输入券码" />
+    </view>
+  </view>
+  <view class="copupon flex-hc-vc" wx:elif="{{type == 2}}">
+    <label class="grey3">券码：</label>
+    <view class="input-box flex-g-1">
+      {{coupon}}
+    </view>
+  </view>
+  <button class="to-verify" bindtap="toVerify">验证券码</button>
+</view>

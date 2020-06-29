@@ -1,0 +1,54 @@
+<view class="list-content">
+  <!-- 日期筛选 -->
+  <view class="picker_group">  
+    <picker mode="date" value="{{startDate}}"  end="{{endDate}}" bindchange="handleStartDateChange">
+      <view class="picker">
+        {{startDate}}
+      </view>
+    </picker>
+    <text>至</text>
+    <picker mode="date" value="{{endDate}}" start="{{startDate}}" end="2050-01-01" bindchange="handleEndDateChange">
+      <view class="picker">
+        {{endDate}}
+      </view>
+    </picker>
+    <view class="search" bindtap="refresh">查询</view>
+  </view>
+  <view class="total-price" wx:if="{{list && list.length>0}}">总核销金额：<text>￥{{totalPrice}}</text></view>
+  <view class="order-list" wx:if="{{list && list.length>0}}" >
+    <block wx:for="{{list}}" wx:for-item="listItem" wx:key="index">
+      <block wx:for="{{listItem}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+        <view class="list-item-info">
+            <view class="list-info-left">
+              <view class="list-coupon">券码：{{item.coupon}}</view>
+              <view class="list-coupon">核销时间：{{item.writeOffTime}}</view>
+              <view class="list-coupon">商户名称：{{item.businessName}}</view>
+              <view class="list-coupon">券码种类：{{item.couponTypeName}}</view>
+              <view class="list-coupon">渠道名称：{{item.channelName}}</view>
+              <!-- <view class="list-coupon">金额：{{item.price}}</view> -->
+            </view>
+            <view class="list-info-right">
+              <view class="list-price">￥{{item.price}}</view>
+            </view>
+          </view>
+      </block>
+    </block>
+    <view class="bottom_loading" wx:if="{{!isLast}}">努力加载中...</view> 
+    <view class="bottom_loading" wx:else>没有更多内容了~</view>
+  </view>
+  <view class="no-order" wx:if="{{list && list.length==0}}">
+    <text>还没有核销的卡券信息哦~</text>
+  </view>
+  <view class="footer flex-box ">
+      <view class="flex-g-1 flex-hc-vc flex-column" bindtap="toIndex">
+        <i class="iconfont icon-coupon"></i>
+        <text>卡券核销</text>
+      </view>
+      <view class="flex-g-1 flex-hc-vc flex-column blue">
+        <i class="iconfont icon-yewubaobiao"></i>
+        <text>核销记录</text>
+      </view>
+    </view>
+</view>
+
+

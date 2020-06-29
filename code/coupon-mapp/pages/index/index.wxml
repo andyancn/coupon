@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class="container">
+  <block wx:if="{{!loginFlag}}">
+    <view class="login-title">
+      <view>优雅奢侈品洗护中心</view>
+    </view>
+    <view class="login-content">
+      <view class="login-item bd-b flex-box">
+        <label class="grey3">账号</label>
+        <view class="input-box flex1">
+          <input maxlength="30" placeholder-style="color:#ccc;" bindinput="bindUserNameChange" type="text" value="{{user.account}}" placeholder="请输入登录账号" />
+        </view>
+      </view>
+      <view class="login-item bd-b flex-box">
+        <label class="grey3">密码</label>
+        <view class="input-box flex1 flex-box">
+          <input type="text" hidden="{{!isShowpw}}" class="flex1" maxlength="25" placeholder-style="color:#ccc;" bindinput="bindPwdChange" value="{{user.password}}" placeholder="请输入密码" />
+          <input type="password" hidden="{{isShowpw}}" class="flex1" maxlength="25" placeholder-style="color:#ccc;" bindinput="bindPwdChange" value="{{user.password}}" placeholder="请输入密码" />
+          <view class="eye-area" data-showpw="showpw" bindtap="showPW">
+            <text class="iconfont {{isShowpw ? 'icon-eye' : 'icon-eyeclose-fill'}}"></text>
+          </view>
+        </view>
+      </view>
+      <view class="login12306-btn" bindtap="login">登录</view>
+    </view>
+  </block>
+  <block wx:elif="{{loginFlag}}">
+    <view class="manual-btn" >
+      <view class="scan-btn flex-hc-vc flex-column" bindtap="scan">
+        <i class="iconfont icon-saoma"></i>
+        <text>扫码核销</text>
+      </view>
+      <view class="manual" bindtap="toManualVerify">扫不出来？<text>手动输入</text></view>
+    </view>
+    <view class="footer flex-box ">
+      <view class="flex-g-1 flex-hc-vc flex-column blue">
+        <i class="iconfont icon-coupon"></i>
+        <text>卡券核销</text>
+      </view>
+      <view class="flex-g-1 flex-hc-vc flex-column" bindtap="getRecode">
+        <i class="iconfont icon-yewubaobiao"></i>
+        <text>核销记录</text>
+      </view>
+    </view>
+  </block>
+</view>

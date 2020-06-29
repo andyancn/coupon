@@ -1,0 +1,138 @@
+page {
+    padding: 110rpx 30rpx 140rpx;
+    box-sizing: border-box;
+    background:#f2f4f7;
+}
+
+/* 日期选择 */
+.picker_group {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #888;
+  border-bottom: 1rpx solid #efefef;
+  background: #fff;
+}
+
+.picker_group picker {
+  color: #5993ff;
+  height: 55rpx;
+  line-height: 55rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid #5993ff;
+  border-radius:10rpx;
+}
+.picker_group text{
+  margin: 0 15rpx;
+}
+
+.search{
+  margin-left: 40rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  padding: 0 40rpx;
+  background: #5993ff;
+  color: #fff;
+  border-radius:10rpx;
+}
+.total-price{
+  display: -webkit-flex;
+  -webkit-justify-content:flex-end;
+  -webkit-align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10rpx;
+  color: #999;
+  font-size: 30rpx;
+}
+.total-price text{
+  color: red;
+}
+
+.list-item-info{
+  /*-webkit-flex:1;
+  flex:1;*/
+  display: -webkit-flex;
+  -webkit-justify-content:space-between;
+  -webkit-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20rpx 0;
+  padding:20rpx 30rpx;
+  border-radius: 10rpx;
+  border: 1px solid #f1f1f1;
+  background: #fff;
+}
+.list-coupon{
+  color:#000000;
+  font-size:24rpx;
+  line-height:28rpx;
+  margin-bottom:15rpx;
+}
+.list-time,.list-desc{
+  color:#999;
+  font-size:22rpx;
+  line-height:20rpx;
+}
+.list-info-right{
+  text-align: right;
+}
+.list-price{
+  color:red;
+  font-size:28rpx;
+  line-height:24rpx;
+  margin-bottom:15rpx;
+}
+
+
+
+
+
+.bottom_loading {
+  margin-bottom: 20rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+}
+
+.no-order {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    width: 80%;
+    text-align: center;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #999;
+    font-size: 28rpx;
+}
+
+
+.footer{
+  position: fixed;
+  bottom:0;
+  left:0;
+  width: 100%;
+  height: 130rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  -webkit-box-shadow: 0 -3rpx 2rpx 0 rgba(7,0,9,0.06);
+  box-shadow: 0 -3rpx 2rpx 0 rgba(7,0,9,0.06);
+  background: #fff;
+}
+.footer i{
+  margin-bottom: 5rpx;
+}
+
