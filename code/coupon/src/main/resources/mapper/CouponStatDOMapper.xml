@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coupon.api.mapper.CouponStatDOMapper" >
+  <resultMap id="BaseResultMap" type="com.coupon.api.entity.CouponStatDO" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="business_code" property="businessCode" jdbcType="VARCHAR" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+    <result column="coupon_type" property="couponType" jdbcType="VARCHAR" />
+    <result column="write_off" property="writeOff" jdbcType="INTEGER" />
+    <result column="un_write_off" property="unWriteOff" jdbcType="INTEGER" />
+    <result column="coupon_total" property="couponTotal" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+    <sql id="baseColumn">
+         `id`, `business_code`, `channel_code`, `coupon_type`, `write_off`, `un_write_off`, `coupon_total`, `create_time`, `update_time`
+
+    </sql>
+  <update id="generate" >
+      update coupon_stat set un_write_off = un_write_off+#{num},coupon_total=coupon_total+#{num}
+      where
+       business_code=#{couponStat.businessCode}
+       and channel_code=#{couponStat.channelCode}
+       and coupon_type=#{couponStat.couponType}
+  </update>
+    <update id="distribute" >
+      update coupon_stat set un_write_off = un_write_off-#{num},coupon_total=coupon_total-#{num}
+      where
+       business_code=#{couponStat.businessCode}
+       and channel_code=#{couponStat.channelCode}
+       and coupon_type=#{couponStat.couponType}
+  </update>
+  <update id="writeOff">
+     update coupon_stat set un_write_off = un_write_off-1,write_off = write_off+1
+          where
+           business_code=#{couponStat.businessCode}
+           and channel_code=#{couponStat.channelCode}
+           and coupon_type=#{couponStat.couponType}
+  </update>
+
+   <select id="selectUnWriteOffByCouponStatDO" resultType="integer">
+      select ifnull(un_write_off,0) from coupon_stat
+        where  business_code=#{couponStat.businessCode}
+           and channel_code=#{couponStat.channelCode}
+           and coupon_type=#{couponStat.couponType}
+
+   </select>
+
+    <select id="queryList" parameterType="com.coupon.api.entity.CouponStatDO" resultType="com.coupon.api.entity.CouponStatDO">
+    select  coupon_stat.`id`, coupon_stat.`business_code`, coupon_stat.`channel_code`, coupon_stat.`coupon_type`, coupon_stat.`write_off`, coupon_stat.`un_write_off`, coupon_stat.`coupon_total`, coupon_stat.`create_time`, coupon_stat.`update_time`
+        ,coupon_type.name coupon_type_name,business.business_name,channel.channel_name,coupon_type.price type_price
+        from coupon_stat
+        LEFT JOIN channel on coupon_stat.channel_code=channel.channel_code
+        LEFT JOIN business on coupon_stat.business_code=business.business_code
+        LEFT JOIN coupon_type on coupon_stat.coupon_type=coupon_type.code
+    <where>
+        <if test='couponType != null and couponType != ""'>and coupon_stat.coupon_type = #{couponType}</if>
+        <if test='channelCode != null and channelCode != ""'>and coupon_stat.channel_code = #{channelCode}</if>
+        <if test='businessCode != null and businessCode != ""'>and coupon_stat.business_code = #{businessCode}</if>
+        <if test='typePrice != null '>and coupon_type.price = #{typePrice}</if>
+    </where>
+    order by coupon_stat.update_time desc ,coupon_stat.business_code ,coupon_stat.channel_code
+        <if test="pageIndex != null and pageSize != null">
+        limit #{offset}, #{pageSize}
+    </if>
+
+
+</select>
+
+    <select id="queryCount" parameterType="com.coupon.api.entity.CouponStatDO" resultType="int">
+        select count(*)  from coupon_stat
+        <where>
+            <if test='couponType != null and couponType != ""'>and coupon_type = #{couponType}</if>
+            <if test='channelCode != null and channelCode != ""'>and channel_code = #{channelCode}</if>
+            <if test='businessCode != null and businessCode != ""'>and business_code = #{businessCode}</if>
+        </where>
+
+    </select>
+</mapper>
